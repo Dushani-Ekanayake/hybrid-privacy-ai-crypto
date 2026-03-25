@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+models/*.joblib
+data/sample_loan_data.csv
+.DS_Store
+*.egg-info/
+dist/
+build/
+.ipynb_checkpoints/
