@@ -1,4 +1,5 @@
 ### Test all API endpoints from VS Code
+
 ### Install "REST Client" extension (humao.rest-client) to run these
 
 @baseUrl = http://localhost:8000
@@ -23,7 +24,7 @@ Content-Type: application/json
 
 ### Prediction with Differential Privacy
 POST {{baseUrl}}/predict/private
-Content-Type: application/json
+Content-Type: application/json  
 
 {
   "income": 50000,
