@@ -406,9 +406,6 @@
 
     const endpoint = `${API}/predict/${selectedMode}`;
 
-    // For encrypted mode, we'd normally encrypt client-side with TenSEAL (Python/WASM).
-    // Since this is a browser demo, we send plain values to /predict/private as proxy.
-    // In a real deployment, the browser would use a WASM build of TenSEAL.
     const actualEndpoint = selectedMode === "encrypted"
       ? `${API}/predict/private`
       : endpoint;
