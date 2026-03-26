@@ -1,5 +1,10 @@
 #!/bin/bash
 # run.sh — quick start script
+# This script trains the model (if not already trained) and starts the FastAPI server.
+# Usage:
+#   1. Make sure you have Python 3.8+ installed.
+#   2. Install dependencies: pip install -r requirements.txt
+#   3. Run this script: ./run.sh
 
 echo ""
 echo "═══════════════════════════════════════"
