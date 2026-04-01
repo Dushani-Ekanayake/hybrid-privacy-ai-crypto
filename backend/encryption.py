@@ -1,13 +1,3 @@
-"""
-encryption.py — Homomorphic Encryption wrapper using TenSEAL
-
-We use the CKKS scheme (supports real numbers, not just integers).
-The key idea: the user encrypts their data locally, sends ciphertext
-to the server, the server runs computations, and returns an encrypted result.
-The server never sees the raw values at any point.
-
-TenSEAL wraps Microsoft SEAL under the hood.
-"""
 
 import tenseal as ts
 import numpy as np
@@ -15,13 +5,7 @@ import base64
 
 
 def create_context() -> ts.Context:
-    """
-    Create a TenSEAL CKKS context.
-    
-    poly_modulus_degree: controls capacity (higher = more operations but slower).
-    coeff_mod_bit_sizes: precision of the encryption.
-    global_scale: how precisely real numbers are encoded.
-    """
+  
     context = ts.context(
         ts.SCHEME_TYPE.CKKS,
         poly_modulus_degree=4096,
@@ -68,9 +52,6 @@ def he_add_bias(encrypted_result: ts.CKKSVector, bias: float) -> ts.CKKSVector:
 
 
 def sigmoid_approx(x: float) -> float:
-    """
-    Polynomial approximation of sigmoid for encrypted domain.
-    Used after decryption when full HE sigmoid isn't available.
-    Real HE sigmoid requires degree-7+ polynomials — overkill for this demo.
-    """
+   
+
     return 1.0 / (1.0 + np.exp(-x))
