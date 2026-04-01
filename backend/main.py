@@ -1,14 +1,4 @@
-"""
-main.py — FastAPI backend server
 
-This is the cloud-side server. Key design principle:
-- /predict/plain  → baseline, no privacy (for comparison)
-- /predict/private → DP only (output noise)
-- /predict/encrypted → full HE pipeline (encrypted inputs + DP output)
-
-The server never decrypts user data in the /predict/encrypted endpoint.
-It operates entirely on ciphertext.
-"""
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,10 +19,6 @@ from encryption import (
     sigmoid_approx,
 )
 
-
-# ─────────────────────────────────────────────
-# App setup
-# ─────────────────────────────────────────────
 
 app = FastAPI(
     title="Hybrid Privacy AI",
@@ -58,10 +44,6 @@ dp = DifferentialPrivacy(epsilon=1.0, sensitivity=1.0)
 he_context = create_context()
 
 
-# ─────────────────────────────────────────────
-# Request / Response schemas
-# ─────────────────────────────────────────────
-
 class PlainInput(BaseModel):
     income: float = Field(..., example=50000)
     credit_score: float = Field(..., example=720)
@@ -81,10 +63,6 @@ class PredictionResult(BaseModel):
     latency_ms: float
 
 
-# ─────────────────────────────────────────────
-# Helpers
-# ─────────────────────────────────────────────
-
 def scale_features(features: list) -> list:
     """Apply the same scaling the model was trained with."""
     import numpy as np
@@ -95,10 +73,6 @@ def scale_features(features: list) -> list:
 def make_decision(prob: float) -> str:
     return "Approved ✓" if prob >= 0.5 else "Rejected ✗"
 
-
-# ─────────────────────────────────────────────
-# Routes
-# ─────────────────────────────────────────────
 
 @app.get("/")
 def root():
@@ -154,16 +128,7 @@ def predict_private_endpoint(data: PlainInput):
 
 @app.post("/predict/encrypted", response_model=PredictionResult)
 def predict_encrypted_endpoint(data: EncryptedInput):
-    """
-    Full privacy pipeline:
-    1. Server receives encrypted (CKKS) feature vector
-    2. Performs linear forward pass directly on ciphertext
-    3. Decrypts only the raw logit (still just a number, not input data)
-    4. Applies sigmoid + DP noise
-    5. Returns noisy probability
-
-    The server NEVER sees income, credit score, debt, or years.
-    """
+  
     t0 = time.time()
 
     try:
