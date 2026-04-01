@@ -1,14 +1,4 @@
-"""
-model.py — Logistic Regression model for loan approval prediction
 
-We use sklearn's LogisticRegression because:
-1. It's linear, so we can extract weights and biases explicitly.
-2. This lets us manually perform the forward pass on encrypted data
-   using HE dot products (which only work on linear operations).
-
-Run this file directly to train and save the model:
-    python model.py
-"""
 
 import numpy as np
 import pandas as pd
