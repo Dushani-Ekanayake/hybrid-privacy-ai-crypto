@@ -1,13 +1,3 @@
-"""
-privacy.py — Differential Privacy layer
-
-We use the Laplace mechanism here. The idea is simple:
-after the model makes a prediction, we add a tiny amount of
-random noise calibrated to (sensitivity / epsilon).
-
-- epsilon: privacy budget. smaller = more private, less accurate.
-- sensitivity: how much one person's data can shift the output.
-"""
 
 import numpy as np
 
