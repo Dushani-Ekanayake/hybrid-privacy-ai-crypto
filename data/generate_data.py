@@ -1,10 +1,3 @@
-"""
-generate_data.py — Run this to regenerate sample_loan_data.csv
-
-Usage:
-    python generate_data.py
-    python generate_data.py --n 1000
-"""
 
 import argparse
 import sys
