@@ -1,8 +1,3 @@
-# Setup Guide
-
-Follow these steps to get the project running locally in VS Code.
-
----
 
 ## Prerequisites
 
@@ -11,13 +6,7 @@ Follow these steps to get the project running locally in VS Code.
 - VS Code
 
 ---
-
-## Step 1 — Open the project
-
-Open VS Code, then:
-```
-File → Open Folder → select hybrid-privacy-ai/
-```
+## Step 1 — Clone the project open it .
 
 ---
 
@@ -115,24 +104,3 @@ Run all cells for the full walkthrough including visualizations.
 
 ---
 
-## Project layout recap
-
-```
-hybrid-privacy-ai/
-├── .vscode/           # VS Code settings, launch configs
-├── backend/
-│   ├── main.py        # FastAPI server (start here)
-│   ├── model.py       # ML model training + inference
-│   ├── encryption.py  # TenSEAL HE wrapper
-│   ├── privacy.py     # Differential privacy (Laplace)
-│   └── requirements.txt
-├── frontend/
-│   └── index.html     # Demo 
-├── notebooks/
-│   └── demo.ipynb     # Jupyter walkthrough
-├── data/              # Generated data goes here
-├── models/            # Saved model files go here
-├── api_tests.http     # REST Client test file
-├── run.sh             # One-command start
-└── SETUP.md           # This file
-```
